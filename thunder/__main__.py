@@ -1,6 +1,5 @@
 import logging
 import click
-import uvicorn
 from thunder.api.handlers import app
 from thunder.engine.train import train_chunk
 import pandas as pd
@@ -18,6 +17,7 @@ def cli():
 @click.option("--port", default=8000, help="Port to run the API server")
 def serve(host, port):
     """Start the FastAPI inference server"""
+    import uvicorn
     uvicorn.run(app, host=host, port=port, proxy_headers=True)
 
 

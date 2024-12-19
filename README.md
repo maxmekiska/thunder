@@ -56,3 +56,42 @@ python -m thunder chunk --input climate-data.csv --size 500
 ## `compose`
 
 `docker-compose up --build`
+
+```mermaid
+graph TD
+    subgraph DockerCompose[Docker Compose]
+        subgraph NGINX[nginx reverse proxy]
+            NGINXProxy[Handles HTTP Requests]
+        end
+
+        subgraph FastAPIContainer[Docker Container]
+            FastAPILib[thunder]
+            ConfigFile[config.json]
+            SavedModel[model.pth - PyTorch]
+            Preprocessor[preprocessor.pkl]
+
+                subgraph FastAPIApp[FastAPI app]
+                    subgraph uvicorn
+                        inferenceendpoint[inference endpoint]
+                    end
+
+                end
+        end
+
+  
+
+        NGINXProxy --> |sends request| inferenceendpoint
+    end
+
+    subgraph Client
+    
+    end
+
+    Client -->|sends request| NGINXProxy
+    FastAPILib -->|launches| FastAPIApp
+    FastAPILib -->|loads| SavedModel
+    FastAPILib -->|loads| Preprocessor
+    FastAPILib -->|reads| ConfigFile
+    inferenceendpoint -->|sends prediction| NGINXProxy
+    NGINXProxy -->|returns prediction| Client
+```

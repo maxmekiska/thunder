@@ -2,8 +2,8 @@
   "training_config": {
     "epochs": 10
   },
-  "preprocessor_path": "preprocessor/preprocessor-12-16-2024.pkl",
-  "model_path": "model/model-12-16-2024.pth",
+  "preprocessor_path": "preprocessor/preprocessor-12-19-2024.pkl",
+  "model_path": "model/model-12-19-2024.pth",
   "model_config": {
     "num_features": 1,
     "hidden_size": 64,
