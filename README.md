@@ -1,4 +1,20 @@
-# `manual`
+# `thunder`
+
+thunder is a time series prediction deep learning pipeline built on the following stack:
+
+1. pytorch-lightning
+2. scikit-learn
+3. FastAPI
+4. Nginx
+5. click
+
+At its core, thunder is a barebones python library with a click-based command-line interface, enabling users to train an xLSTM model on time series data. It supports two main modes of operation:
+
+1. training mode via the command `python -m thunder chunk`. Model and training configurations can be easily modified in the config.json file. As the name implies, training is performed via chunking, which enables processing large datasets efficiently.
+
+2. inference mode via `python -m thunder serve`. thunder exposes a FastAPI endpoint `/predict` that accepts incoming data and returns predictions.
+
+Additionally, thunder provides a near production ready framework for its inference functionality. This allows thunder to be deployed within a Docker compose setup, leveraging Nginx as a reverse proxy in front of the FastAPI application.
 
 ## `python -m thunder serve`  
 
